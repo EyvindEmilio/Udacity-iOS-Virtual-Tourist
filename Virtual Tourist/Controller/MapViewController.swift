@@ -8,14 +8,11 @@
 import UIKit
 import CryptoKit
 import CommonCrypto
-import OAuthSwift
 import MapKit
 import CoreData
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
-    
-    var loginTask: OAuthSwiftRequestHandle? = nil
     
     var currentAnnotation: MKPointAnnotation? = nil
 

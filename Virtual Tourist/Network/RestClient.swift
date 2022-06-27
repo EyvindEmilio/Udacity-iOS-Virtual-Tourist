@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OAuthSwift
 
 class RestClient{
     
