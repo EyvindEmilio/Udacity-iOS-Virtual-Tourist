@@ -204,7 +204,6 @@
 			);
 			mainGroup = 81089A9F2846E31C0006CDF6;
 			packageReferences = (
-				81089AC1284856DF0006CDF6 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
 			);
 			productRefGroup = 81089AA92846E31C0006CDF6 /* Products */;
 			projectDirPath = "";
@@ -465,17 +464,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		81089AC1284856DF0006CDF6 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		81089ACB28486E350006CDF6 /* VirtualTourist.xcdatamodeld */ = {
