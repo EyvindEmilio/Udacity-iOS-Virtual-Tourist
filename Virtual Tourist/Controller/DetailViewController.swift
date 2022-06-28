@@ -144,8 +144,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         fetchedResultsController.fetchedObjects?.forEach({ photo in
             pin.removeFromPhotos(photo)
         })
-        
-        try? fetchedResultsController.managedObjectContext.save()
+        try? dataController.viewContext.save()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -167,6 +166,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let photo = fetchedResultsController.object(at: indexPath)
+        self.pin.removeFromPhotos(photo)
+        try? self.dataController.viewContext.save()
+    }
+    
     private func handleEmptyView() {
         debugPrint("handleEmptyView() count=\(fetchedResultsController.fetchedObjects!.count)")
         if fetchedResultsController.fetchedObjects!.isEmpty {
@@ -186,6 +192,9 @@ extension DetailViewController: NSFetchedResultsControllerDelegate {
             self.flowLayout.collectionView?.insertItems(at: [newIndexPath!])
             break
         case .delete:
+            if indexPath!.row < fetchedResultsController.fetchedObjects?.count ?? 0 {
+                self.flowLayout.collectionView?.deleteItems(at: [indexPath!])
+            }
             break
         case .update:
             self.flowLayout.collectionView?.reloadItems(at: [indexPath!])

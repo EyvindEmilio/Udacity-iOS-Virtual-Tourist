@@ -59,21 +59,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @objc func onPointSelected(_ gestureReconizer: UILongPressGestureRecognizer) {
-        
-        let location = gestureReconizer.location(in: mapView)
-        let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
-        
-        if currentAnnotation != nil {
-            mapView.removeAnnotation(currentAnnotation!)
+        if gestureReconizer.state == .began {
+            debugPrint("LongPress ended")
+            let location = gestureReconizer.location(in: mapView)
+            let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
+            
+            currentAnnotation = generateAnnotation(coordinate.latitude, coordinate.longitude)
+            mapView.addAnnotation(currentAnnotation!)
+            
+            
+            let pin = Pin.newInstance(lat: currentAnnotation!.coordinate.latitude, lon: currentAnnotation!.coordinate.longitude, context: dataController.viewContext)
+            try? dataController.viewContext.save()
+            openDetailController(pin: pin, isNew: true)
         }
-        
-        currentAnnotation = generateAnnotation(coordinate.latitude, coordinate.longitude)
-        mapView.addAnnotation(currentAnnotation!)
-        
-        
-        let pin = Pin.newInstance(lat: currentAnnotation!.coordinate.latitude, lon: currentAnnotation!.coordinate.longitude, context: dataController.viewContext)
-        try? dataController.viewContext.save()
-        openDetailController(pin: pin, isNew: true)
     }
     
     private func loadLastPosition() {
@@ -134,8 +132,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         } catch {
             showSingleAlert("Can't load pin")
-        }
-            
+        }       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
