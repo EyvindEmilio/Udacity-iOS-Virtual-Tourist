@@ -11,7 +11,6 @@ class RestClient{
     
     struct Auth {
         static let CUSTOMER_KEY = "<YOUR_CUSTOMER_KEY>"
-        static let CUSTOMER_SECRET = "<YOUT_CUSTOMER_SECRET>"
     }
     
     enum Endpoints {
